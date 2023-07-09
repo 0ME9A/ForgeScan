@@ -1,6 +1,6 @@
 import * as ImagePicker from "expo-image-picker";
 
-import { View, StyleSheet, Pressable } from "react-native";
+import { View, StyleSheet, Pressable, Text } from "react-native";
 import { useState, useCallback, useContext } from "react";
 import { useFocusEffect } from "@react-navigation/native";
 import { BarCodeScanner } from "expo-barcode-scanner";
@@ -173,6 +173,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     bottom: "20%",
     height: 50,
+    zIndex: 10,
     overflow: "visible",
   },
   slider: {
