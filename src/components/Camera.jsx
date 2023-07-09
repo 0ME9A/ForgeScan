@@ -37,7 +37,6 @@ export default function Cam({ flash, zoom }) {
             We need your permission to show the camera
           </Text>
           <TouchableNativeFeedback
-            onPress={() => console.log("clicking")}
             onPress={requestPermission}
           >
             <View style={styles.permissionBtn}>
