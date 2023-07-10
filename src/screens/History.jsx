@@ -11,6 +11,7 @@ import {
 } from "@expo/vector-icons";
 
 import AlertBox from "../components/AlertBox";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 const db = SQLite.openDatabase("myDatabase.db");
 
@@ -25,6 +26,8 @@ export default function Home({ navigation }) {
     message: null,
     color: null,
   });
+
+  const insets = useSafeAreaInsets();
 
   const handleCheckbox = () => {
     if (isCheck) {
@@ -125,48 +128,48 @@ export default function Home({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <View style={styles.responseContainer}>
-        <View style={styles.headerContainer}>
-          <Text
-            style={{
-              fontSize: 20,
-            }}
-          >
-            History
-          </Text>
+      <View style={[styles.headerContainer, { paddingTop: 50 }]}>
+        <Text
+          style={{
+            fontSize: 20,
+          }}
+        >
+          History
+        </Text>
 
-          <View style={{ flexDirection: "row", gap: 16, alignItems: "center" }}>
-            {isDelete ? (
-              <Pressable onPress={handleAllDelete}>
-                <MaterialIcons name="delete-forever" size={24} color="black" />
-              </Pressable>
+        <View style={{ flexDirection: "row", gap: 16, alignItems: "center" }}>
+          {isDelete ? (
+            <Pressable onPress={handleAllDelete}>
+              <MaterialIcons name="delete-forever" size={24} color="black" />
+            </Pressable>
+          ) : (
+            <MaterialIcons
+              name="delete-forever"
+              size={24}
+              color="black"
+              style={{ opacity: 0.3 }}
+            />
+          )}
+          <View style={{ borderWidth: 1, opacity: 0.1, height: "50%" }} />
+          <Pressable onPress={handleCheckbox}>
+            {isCheck ? (
+              <MaterialIcons name="check-box" size={24} color="black" />
             ) : (
               <MaterialIcons
-                name="delete-forever"
+                name="check-box-outline-blank"
                 size={24}
                 color="black"
-                style={{ opacity: 0.3 }}
               />
             )}
-            <View style={{ borderWidth: 1, opacity: 0.1, height: "50%" }} />
-            <Pressable onPress={handleCheckbox}>
-              {isCheck ? (
-                <MaterialIcons name="check-box" size={24} color="black" />
-              ) : (
-                <MaterialIcons
-                  name="check-box-outline-blank"
-                  size={24}
-                  color="black"
-                />
-              )}
-            </Pressable>
-          </View>
+          </Pressable>
         </View>
-        {alertBox.message && (
-          <View style={{ marginTop: -10 }}>
-            <AlertBox message={alertBox.message} color={alertBox.color} />
-          </View>
-        )}
+      </View>
+      {alertBox.message && (
+        <View style={{ marginTop: -10 }}>
+          <AlertBox message={alertBox.message} color={alertBox.color} />
+        </View>
+      )}
+      <View style={styles.responseContainer}>
         <ScrollView>
           <View style={styles.responseSubContainer}>
             {historyDb &&
@@ -232,7 +235,6 @@ const styles = StyleSheet.create({
     borderBottomWidth: 2,
     borderColor: "#CED0FF",
     padding: 20,
-    paddingTop: 60,
   },
   footer: {},
   actionsContainer: {
@@ -249,15 +251,14 @@ const styles = StyleSheet.create({
   iconContainer: {},
   responseContainer: {
     flex: 1,
-    // padding: 20,
     gap: 10,
   },
   responseSubContainer: {
     flex: 1,
-    paddingHorizontal: 20,
     paddingBottom: 100,
     gap: 5,
     overflow: "scroll",
+    padding: 10
   },
   primeAction: {
     padding: 10,
