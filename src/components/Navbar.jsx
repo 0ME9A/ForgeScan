@@ -1,10 +1,13 @@
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { Feather, Ionicons } from "@expo/vector-icons";
 import { Pressable, View, Text } from "react-native";
 import { StyleSheet } from "react-native";
 
 export default function Navbar({ brand, navigation }) {
+  const insets = useSafeAreaInsets();
+
   return (
-    <View style={styles.navbar}>
+    <View style={[styles.navbar, {paddingTop: insets.top}]}>
       {brand ? (
         <Text style={styles.brand}>ForgeScan</Text>
       ) : (
@@ -23,7 +26,6 @@ const styles = StyleSheet.create({
   navbar: {
     display: "flex",
     alignItems: "flex-end",
-    paddingTop: 50,
     flexDirection: "row",
     justifyContent: "space-between",
   },

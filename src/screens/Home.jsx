@@ -69,8 +69,6 @@ export default function Home({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <Navbar brand={true} navigation={navigation} />
-
       {alertBox && <AlertBox message={alertBox} />}
 
       {isFocus && <Cam flash={flashlightOn ? 2 : 0} zoom={value} />}
